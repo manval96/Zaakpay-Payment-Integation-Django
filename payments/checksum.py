@@ -1,6 +1,10 @@
 from hmac import new as hmac
 from hashlib import sha256
 import binascii
+from decouple import config
+config.encoding='base64_codec'
+
+#secret_key = b'0678056d96914a8583fb518caf42828a'#config('ZAAKPAY_SECRET_KEY')
 
 class Checksum:
     def __init__(self, postdata):
