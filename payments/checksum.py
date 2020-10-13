@@ -54,7 +54,7 @@ class Checksum:
     
     def calculate_checksum(self, secret_key, input_string):
         """ Calculates HMAC SHA256 signature of the data"""
-        #byte_key = binascii.unhexlify(secret_key)
+        secret_key = bytearray(secret_key)
         checksum = hmac(secret_key, input_string.encode(), sha256).hexdigest()
         return str(checksum)
     

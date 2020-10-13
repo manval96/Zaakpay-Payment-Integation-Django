@@ -3,11 +3,12 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 import os
+from decouple import config
 
 from .checksum import *
 
-secret_key = b'0678056d96914a8583fb518caf42828a' #put your secret key here. Need to be a bytearray
-Merchant_ID = 'b6415a6443604ec59644a70c8b25a0f6'
+secret_key = config('ZAAKPAY_SECRET_KEY') #put your secret key here. Need to be a bytearray
+Merchant_ID = config('ZAAKPAY_MERCHENT_KEY')
 
 def payment_page(request):
     return render(request, 'merchant.html')
