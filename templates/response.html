@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <td align="center" valign="middle">
+        <form action="/" method="post">
+            {%csrf_token%}
+            <tr>
+                <td colspan="2" width="100%" align="center" valign="middle"><input type="submit" value="Go To Home Page" /></td>	
+            </tr>
+        </form>
+    </td>
+    
+    <td>
+        {% for key, value in response_dict.items %}
+        <tr align="center" valign="middle">{{key}}={{value}}<br></tr>
+        {%endfor%}
+    </td>
+
+</body>
+</html>
