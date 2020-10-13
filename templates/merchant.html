@@ -4,8 +4,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Merchant Site</title>
 </head>
-<body>
+<!--
+<script>
+function autoPop(){
+	document.getElementById("orderId").value= "ZPLive" + String(new Date().getTime());	//	Autopopulating orderId
+	var today = new Date();
+	var dateString = String(today.getFullYear()).concat("-").concat(String(today.getMonth()+1)).concat("-").concat(String(today.getDate()));
+	document.getElementById("txnDate").value= dateString;
+}
+</script>
 
+<body onload="autoPop();">
+-->
+
+<body>
 <center>
 <form action="posttozaakpay" method="post">
 {% csrf_token %}
@@ -14,19 +26,14 @@
 	<td colspan="2" align="center" valign="middle">This Page is for Testing purpose and behaves like merchant input page </td>
 	
 </tr>
-<tr>	
-	<td width="50%" align="center" valign="middle">Merchant Identifier</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="merchantIdentifier" value="889653b03ce04a57b54db6463b1e5445" /> </td>
-																									
-</tr>
+
+<!--
 <tr>	
 	<td width="50%" align="center" valign="middle">Order Id</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="orderId" value="" /> </td>
+	<td width="50%" align="center" valign="middle"><input type="text" id="orderId" name="orderId" /></td>
 </tr>
-<tr>
-	<td width="50%" align="center" valign="middle">return url</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="returnUrl" value="http://127.0.0.1:8000/payments/response" /></td>
-</tr>
+-->
+
 <tr>	
 	<td width="50%" align="center" valign="middle">Buyer Email</td>
 	<td width="50%" align="center" valign="middle"><input type="text" name="buyerEmail" value=""  /> </td>
@@ -63,37 +70,10 @@
 	<td width="50%" align="center" valign="middle">Buyer Phone No</td>
 	<td width="50%" align="center" valign="middle"><input type="text" name="buyerPhoneNumber" value="" /></td>
 </tr>
-<tr>	
-	<td width="50%" align="center" valign="middle">Txntype</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="txnType" value="1" /> </td>
-</tr>
-<tr>
-	<td width="50%" align="center" valign="middle">Zppayoption</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="zpPayOption" value="1" /> </td>
-</tr>
-<tr>
-	<td width="50%" align="center" valign="middle">Mode</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="mode" value="0" /> </td>
-</tr>
-<tr>
-	<td width="50%" align="center" valign="middle">Currency</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="currency" value="INR" /></td>
-</tr>
-<tr>	
-	<td width="50%" align="center" valign="middle">Amount In Paisa</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="amount" value="1000" /> </td>
-</tr>
+
 <tr>
 	<td width="50%" align="center" valign="middle">IPaddress</td>
 	<td width="50%" align="center" valign="middle"><input type="text" name="merchantIpAddress" value="" /> </td>
-</tr>
-<tr>
-	<td width="50%" align="center" valign="middle"> Purpose</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="purpose" value="1" /></td>
-</tr>
-<tr>	
-	<td width="50%" align="center" valign="middle">Product Description</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="productDescription" value="test product" /> </td>
 </tr>
 
 <tr>	
@@ -152,15 +132,12 @@
 	<td width="50%" align="center" valign="middle"><input type="text" name="shipToLastname" /></td>
 </tr>
 
+<!--
 <tr>
-	<td width="50%" align="center" valign="middle">Txn Date</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="txnDate" value="2015-04-07" /> should be in format "yyyy-mm-dd" </td>
+	<td width="50%" align="right" valign="middle">Transaction Date "YYYY-MM-DD"</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="txnDate" id="txnDate" /></td>
 </tr>
-
-<tr>
-	<td width="50%" align="center" valign="middle">DebitOrCredit</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="debitorcredit" value="wallet" /> should be in format "yyyy-mm-dd" </td>
-</tr>
+-->
 
 <tr>
 	<td colspan="2" width="100%" align="center" valign="middle"><input type="submit" value="PayNow" /></td>	
