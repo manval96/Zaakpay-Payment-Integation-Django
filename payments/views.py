@@ -6,9 +6,11 @@ from django.contrib import messages
 from datetime import datetime
 
 import os
-from mysite.settings import BASE_DIR
+from pathlib import Path
+#from mysite.settings import BASE_DIR
 from .checksum import *
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 secret_key = os.environ.get('ZAAKPAY_SECRET_KEY')
 Merchant_ID = os.environ.get('ZAAKPAY_MERCHANT_ID')
 
