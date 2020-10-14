@@ -1,16 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
 
 from datetime import datetime
 
 import os
-from decouple import config
-#config.encoding='base64_codec'
+from mysite.settings import BASE_DIR
 from .checksum import *
 
 secret_key = os.environ.get('ZAAKPAY_SECRET_KEY')
-Merchant_ID = os.environ.get('ZAAKPAY_MERCHANT_ID') #config('ZAAKPAY_MERCHENT_KEY')
+Merchant_ID = os.environ.get('ZAAKPAY_MERCHANT_ID')
 
 def payment_page(request):
     return render(request, 'merchant.html')
@@ -28,7 +28,7 @@ def generatePostdata():
     postdata['productDescription'] = 'test product'
     postdata['debitorcredit'] = 'wallet'
     postdata['orderId'] = datetime.now().strftime('%m%H%d%M%Y%S')  # generates unique order ID
-    postdata['txnDate'] = datetime.now().strtime('%Y-%m-%d')  # generate current date in YYYY-MM-DD format
+    postdata['txnDate'] = datetime.now().strftime('%Y-%m-%d')  # generate current date in YYYY-MM-DD format
     
     return postdata
 
@@ -39,7 +39,11 @@ def posttozaakpay(request):
         postdata = generatePostdata()
         data = request.POST
         for key in data:
+            if data[key] == '':
+                messages.error(request, "Please fill in the Required Details")
+                return redirect('payment_page')
             postdata[key] = data[key]
+            
     
     checksum = Checksum(postdata)  # creating Checksum object
     alldata = checksum.get_allParams()

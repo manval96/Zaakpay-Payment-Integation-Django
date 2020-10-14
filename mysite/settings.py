@@ -35,6 +35,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'travello.apps.TravelloConfig',
     'accounts.apps.AccountsConfig',
+    'payments.apps.PaymentsConfig',
+    'updater.apps.UpdaterConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

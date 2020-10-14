@@ -5,17 +5,24 @@ from django.contrib import messages
 def register(request):
     
     if request.method == 'POST':
+        
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
         username = request.POST['username']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
+        password1 = request.POST['password']
+        password2 = request.POST['re_password']
         email = request.POST['email']
+        
+        details = [first_name, last_name, username, password1, password2, email]
+        for item in details:
+            if item is '':
+                messages.error(request, 'Please fill all the details')
+                return redirect('register')
         
         if password1==password2:
             if User.objects.filter(username=username).exists():
                 #print('Username already in use')
-                messages.info(request, 'username taken')
+                messages.error(request, 'username taken')
                 return redirect('register')
             elif User.objects.filter(email=email).exists():
                 #print('email taken')
