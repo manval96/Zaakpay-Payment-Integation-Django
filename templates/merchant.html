@@ -1,155 +1,148 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Merchant Site</title>
-</head>
-<!--
-<script>
-function autoPop(){
-	document.getElementById("orderId").value= "ZPLive" + String(new Date().getTime());	//	Autopopulating orderId
-	var today = new Date();
-	var dateString = String(today.getFullYear()).concat("-").concat(String(today.getMonth()+1)).concat("-").concat(String(today.getDate()));
-	document.getElementById("txnDate").value= dateString;
-}
-</script>
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
 
-<body onload="autoPop();">
--->
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Payment</title>
+
+    <!-- Google Font -->
+    <!--<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet"> -->
+
+    <!-- Css Styles  -->
+    <link rel="stylesheet" href="{% static 'payments/merchant/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'payments/merchant/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'payments/merchant/css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'payments/merchant/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'payments/merchant/css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'payments/merchant/css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'payments/merchant/css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'payments/merchant/css/style.css' %}" type="text/css">
+</head>
 
 <body>
-<center>
-<form action="posttozaakpay" method="post">
-{% csrf_token %}
-<table width="600px;">
-<tr>
-	<td colspan="2" align="center" valign="middle">This Page is for Testing purpose and behaves like merchant input page </td>
-	
-</tr>
-
-<!--
-<tr>	
-	<td width="50%" align="center" valign="middle">Order Id</td>
-	<td width="50%" align="center" valign="middle"><input type="text" id="orderId" name="orderId" /></td>
-</tr>
--->
-
-<tr>	
-	<td width="50%" align="center" valign="middle">Buyer Email</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="buyerEmail" value=""  /> </td>
-</tr>
-<tr>	
-	<td width="50%" align="center" valign="middle">Buyer First Name</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="buyerFirstName" value="" /> </td>
-</tr>
-<tr>
-	<td width="50%" align="center" valign="middle">Buyer Last Name</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="buyerLastName" value="" /> </td>
-</tr>
-<tr>
-	<td width="50%" align="center" valign="middle">Buyer Address</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="buyerAddress" value="" /> </td>
-</tr>
-<tr>
-	<td width="50%" align="center" valign="middle">Buyer City</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="buyerCity" value="" /></td>
-</tr>
-<tr>	
-	<td width="50%" align="center" valign="middle">Buyer State</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="buyerState" value="" /> </td>
-</tr>
-<tr>
-	<td width="50%" align="center" valign="middle">Buyer Country</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="buyerCountry" value="" /> </td>
-</tr>
-<tr>
-	<td width="50%" align="center" valign="middle">Buyer Pincode</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="buyerPincode" value="" /> </td>
-</tr>
-<tr>
-	<td width="50%" align="center" valign="middle">Buyer Phone No</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="buyerPhoneNumber" value="" /></td>
-</tr>
-
-<tr>
-	<td width="50%" align="center" valign="middle">IPaddress</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="merchantIpAddress" value="" /> </td>
-</tr>
-
-<tr>	
-	<td width="50%" align="center" valign="middle">Product Description</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="product1Description" /> </td>
-</tr>
-<tr>	
-	<td width="50%" align="center" valign="middle">Product Description</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="product2Description" /> </td>
-</tr>
-<tr>	
-	<td width="50%" align="center" valign="middle">Product Description</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="product3Description" /> </td>
-</tr>
-<tr>	
-	<td width="50%" align="center" valign="middle">Product Description</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="product4Description" /> </td>
-</tr>
-<tr>
-	<td width="50%" align="center" valign="middle">Ship To Address</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="shipToAddress" /> </td>
-</tr>
-
-<tr>
-	<td width="50%" align="center" valign="middle">Ship To City</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="shipToCity" /> </td>
-</tr>
-
-<tr>
-	<td width="50%" align="center" valign="middle">Ship To State</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="shipToState" /></td>
-</tr>
-
-<tr>	
-	<td width="50%" align="center" valign="middle">Ship To Country</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="shipToCountry" /> </td>
-</tr>
+    <!-- Page Preloder -->
 
 
-<tr>
-	<td width="50%" align="center" valign="middle">Ship To Pincode</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="shipToPincode" /> </td>
-</tr>
-<tr>
-	<td width="50%" align="center" valign="middle">Ship To Phone Number</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="shipToPhoneNumber" /> </td>
-</tr>
-
-<tr>
-	<td width="50%" align="center" valign="middle">Ship To Firstname</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="shipToFirstname" /></td>
-</tr>
-
-<tr>
-	<td width="50%" align="center" valign="middle">Ship To Lastname</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="shipToLastname" /></td>
-</tr>
-
-<!--
-<tr>
-	<td width="50%" align="right" valign="middle">Transaction Date "YYYY-MM-DD"</td>
-	<td width="50%" align="center" valign="middle"><input type="text" name="txnDate" id="txnDate" /></td>
-</tr>
--->
-
-<tr>
-	<td colspan="2" width="100%" align="center" valign="middle"><input type="submit" value="PayNow" /></td>	
-</tr>
+    <!-- Header Section Begin -->
 
 
-</table>
+    <!-- Hero Section Begin -->
 
-</form>
-</center>
 
-		
-		
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="checkout__form">
+                <h4>Billing Details</h4>
+                <form action="posttozaakpay" method="post">
+                  {% csrf_token %}
+                    <div class="row">
+                        {% for message in messages %}
+                        <tr>
+                          <td colspan="2" align="center" valign="middle">{{message}} </td>
+                        </tr>
+                        {% endfor %}
+                        <div class="col-lg-8 col-md-6">
+                            <div class="checkout__input">
+                                <p>Amount to Recharge<span>*</span></p>
+                                <input type="text" name="amount">
+                            </div>                            
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Fist Name</p>
+                                        <input type="text" buyerFirstName>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Last Name</p>
+                                        <input type="text" buyerLastName>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Address</p>
+                                <input type="text" name="buyerAddress">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Town/City</p>
+                                <input type="text" name="buyerCity">
+                            </div>
+                            <div class="checkout__input">
+                                <p>State</p>
+                                <input type="text" name="buyerState">
+                            </div>
+                            <div class="checkout__input">
+                              <p>Country</p>
+                              <input type="text" name="buyerCountry">
+                            </div>
+                            <div class="checkout__input">
+                                <p>Postcode / ZIP</p>
+                                <input type="text" name="buyerPincode">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Email<span>*</span></p>
+                                        <input type="text" name="buyerEmail">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Phone</p>
+                                        <input type="text" name="buyerPhoneNumber">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <button type="submit" class="site-btn">PLACE ORDER</button>
+                            </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
+
+      <!-- Footer Section Begin -->
+    <footer class="footer spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer__copyright">
+                        <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
+                        <!--<div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+
+    
+
+    <!-- Js Plugins 
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/main.js"></script>
+
+ -->
+
 </body>
+
 </html>

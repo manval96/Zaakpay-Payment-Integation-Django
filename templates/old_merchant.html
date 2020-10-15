@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Merchant Site</title>
+</head>
+<!--
+<script>
+function autoPop(){
+	document.getElementById("orderId").value= "ZPLive" + String(new Date().getTime());	//	Autopopulating orderId
+	var today = new Date();
+	var dateString = String(today.getFullYear()).concat("-").concat(String(today.getMonth()+1)).concat("-").concat(String(today.getDate()));
+	document.getElementById("txnDate").value= dateString;
+}
+</script>
+
+<body onload="autoPop();">
+-->
+
+<body>
+<center>
+<form action="posttozaakpay" method="post">
+{% csrf_token %}
+<table width="600px;">
+<tr>
+	<td colspan="2" align="center" valign="middle">This Page is for Testing purpose and behaves like merchant input page </td>
+	
+</tr>
+
+{% for key,value in meth_list.items %}
+<tr>
+	<td colspan="2" align="center" valign="middle">This message is from {{value}} method </td>
+	
+</tr>
+{% endfor %}
+
+{% for message in messages %}
+<tr>
+	<td colspan="2" align="center" valign="middle">{{message}} </td>
+	
+</tr>
+{% endfor %}
+
+<!--
+<tr>	
+	<td width="50%" align="center" valign="middle">Order Id</td>
+	<td width="50%" align="center" valign="middle"><input type="text" id="orderId" name="orderId" /></td>
+</tr>
+-->
+
+<tr>	
+	<td width="50%" align="center" valign="middle">Amount</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="amount" value=""  /> </td>
+</tr>
+<tr>	
+	<td width="50%" align="center" valign="middle">Buyer Email</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="buyerEmail" value=""  /> </td>
+</tr>
+<tr>	
+	<td width="50%" align="center" valign="middle">Buyer First Name</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="buyerFirstName" value="" /> </td>
+</tr>
+<tr>
+	<td width="50%" align="center" valign="middle">Buyer Last Name</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="buyerLastName" value="" /> </td>
+</tr>
+<tr>
+	<td width="50%" align="center" valign="middle">Buyer Address</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="buyerAddress" value="" /> </td>
+</tr>
+<tr>
+	<td width="50%" align="center" valign="middle">Buyer City</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="buyerCity" value="" /></td>
+</tr>
+<tr>	
+	<td width="50%" align="center" valign="middle">Buyer State</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="buyerState" value="" /> </td>
+</tr>
+<tr>
+	<td width="50%" align="center" valign="middle">Buyer Country</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="buyerCountry" value="" /> </td>
+</tr>
+<tr>
+	<td width="50%" align="center" valign="middle">Buyer Pincode</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="buyerPincode" value="" /> </td>
+</tr>
+<tr>
+	<td width="50%" align="center" valign="middle">Buyer Phone No</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="buyerPhoneNumber" value="" /></td>
+</tr>
+
+<tr>
+	<td width="50%" align="center" valign="middle">IPaddress</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="merchantIpAddress" value="" /> </td>
+</tr>
+
+<tr>	
+	<td width="50%" align="center" valign="middle">Product Description</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="product1Description" /> </td>
+</tr>
+<tr>	
+	<td width="50%" align="center" valign="middle">Product Description</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="product2Description" /> </td>
+</tr>
+<tr>	
+	<td width="50%" align="center" valign="middle">Product Description</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="product3Description" /> </td>
+</tr>
+<tr>	
+	<td width="50%" align="center" valign="middle">Product Description</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="product4Description" /> </td>
+</tr>
+<tr>
+	<td width="50%" align="center" valign="middle">Ship To Address</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="shipToAddress" /> </td>
+</tr>
+
+<tr>
+	<td width="50%" align="center" valign="middle">Ship To City</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="shipToCity" /> </td>
+</tr>
+
+<tr>
+	<td width="50%" align="center" valign="middle">Ship To State</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="shipToState" /></td>
+</tr>
+
+<tr>	
+	<td width="50%" align="center" valign="middle">Ship To Country</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="shipToCountry" /> </td>
+</tr>
+
+
+<tr>
+	<td width="50%" align="center" valign="middle">Ship To Pincode</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="shipToPincode" /> </td>
+</tr>
+<tr>
+	<td width="50%" align="center" valign="middle">Ship To Phone Number</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="shipToPhoneNumber" /> </td>
+</tr>
+
+<tr>
+	<td width="50%" align="center" valign="middle">Ship To Firstname</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="shipToFirstname" /></td>
+</tr>
+
+<tr>
+	<td width="50%" align="center" valign="middle">Ship To Lastname</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="shipToLastname" /></td>
+</tr>
+
+<!--
+<tr>
+	<td width="50%" align="right" valign="middle">Transaction Date "YYYY-MM-DD"</td>
+	<td width="50%" align="center" valign="middle"><input type="text" name="txnDate" id="txnDate" /></td>
+</tr>
+-->
+
+<tr>
+	<td colspan="2" width="100%" align="center" valign="middle"><input type="submit" value="PayNow" /></td>	
+</tr>
+
+
+</table>
+
+</form>
+</center>
+
+		
+		
+</body>
+</html>

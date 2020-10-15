@@ -16,22 +16,22 @@ class Checksum:
         """
         # Do not Change params order.
         post_params = [
-                        "amount","buyerAddress","buyerCity","buyerCountry","buyerEmail"
-                       ,"buyerFirstName","buyerLastName","buyerPhoneNumber","buyerPincode"
-                       ,"buyerState","currency","debitorcredit","merchantIdentifier"
-                       ,"merchantIpAddress","mode","orderId","product1Description",
-                       "product2Description","product3Description","product4Description"
-                       ,"productDescription","purpose","returnUrl","shipToAddress","shipToCity"
-                       ,"shipToCountry","shipToFirstname","shipToLastname","shipToPhoneNumber"
-                       ,"shipToPincode","shipToState","txnDate","txnType","zpPayOption"
-                       ]
+            "amount","bankid","buyerAddress","buyerCity","buyerCountry","buyerEmail"
+            ,"buyerFirstName","buyerLastName","buyerPhoneNumber","buyerPincode","buyerState"
+            ,"currency","isAutoRedirect","debitorcredit","merchantIdentifier"
+            ,"merchantIpAddress","mode","orderId","product1Description","product2Description"
+            ,"product3Description","product4Description","productDescription","productInfo"
+            ,"purpose","returnUrl","shipToAddress","shipToCity","shipToCountry","shipToFirstname"
+            ,"shipToLastname","shipToPhoneNumber","shipToPincode","shipToState","showMobile"
+            ,"txnDate","txnType","paymentOptionTypes","zpPayOption"
+            ]
         
         allParams = ''
         for key in post_params:
-
-            if(key != 'checksum'):
-                if(self.postdata[key].find(" ")!=-1) : self.postdata[key] = "".join(self.postdata[key].split())
-                if (self.postdata[key] != ""): allParams += key + "=" + self.postdata[key]+"&"
+            if key in self.postdata.keys():
+                if(key != 'checksum'):
+                    if(self.postdata[key].find(" ")!=-1) : self.postdata[key] = "".join(self.postdata[key].split())
+                    if (self.postdata[key] != ""): allParams += key + "=" + self.postdata[key]+"&"
 
         return allParams
     
@@ -41,16 +41,22 @@ class Checksum:
         in format name1=value1&name2=value2&.
         """
         # Do not Change params order.
-        response_params = ["orderId","responseCode","responseDescription"]#,"amount","doRedirect"
-                            # ,"paymentMode","cardId","cardScheme","cardToken","bank","bankid"
-                            # ,"paymentMethod","cardhashid","productDescription","product1Description"
-                            # ,"product2Description","product3Description","product4Description","pgTransId","pgTransTime"
-                            # ]
+        # response_params = [
+        #     "orderId","responseCode","responseDescription","checksum","amount","doRedirect"
+        #     ,"paymentMode","cardId","cardScheme","cardToken","bank","bankid","paymentMethod"
+        #     ,"cardhashid","productDescription","product1Description","product2Description"
+        #     ,"product3Description","product4Description","pgTransId","pgTransTime"
+        #     ]
+        response_params = ['amount','bank','cardId','cardScheme','cardToken','cardhashid'
+                           ,'checksum','doRedirect','orderId','paymentMethod','paymentMode'
+                           ,'responseCode','responseDescription'
+                           ]
         
         allParams_res = ''
         for key in response_params:
             if(key != 'checksum'):
-                if(self.postdata[key].find(" ")!=-1) : self.postdata[key] = "".join(self.postdata[key].split())
+                #if key in self.postdata.keys():
+                    #if(self.postdata[key].find(" ")!=-1) : self.postdata[key] = "".join(self.postdata[key].split())
                 if (self.postdata[key] != ""): allParams_res += key + "=" + self.postdata[key]+"&"
 
         return allParams_res
@@ -58,8 +64,7 @@ class Checksum:
     
     def calculate_checksum(self, secret_key, input_string):
         """ Calculates HMAC SHA256 signature of the data"""
-        secret_key = bytearray(secret_key)
-        checksum = hmac(secret_key, input_string.encode(), sha256).hexdigest()
+        checksum = hmac(secret_key.encode(), input_string.encode(), sha256).hexdigest()
         return str(checksum)
     
     def verify_checksum(self, recieved_checksum, secret_key, allParams):

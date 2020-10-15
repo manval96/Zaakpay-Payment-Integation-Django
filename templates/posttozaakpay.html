@@ -20,7 +20,7 @@ function submitForm(){
     </tr>
     <tr>
         <td align="center" valign="middle">
-            <form action="https://zaakstaging.zaakpay.com/api/paymentTransact/V8" method="post" name="zaakpay">
+            <form action="https://zaakstaging.zaakpay.com/api/paymentTransact/V7" method="post" name="zaakpay">
                 {% for key, value in param_dict.items %}
                 <input type="hidden" name="{{key}}" value="{{value}}">
                 {%endfor%}
